@@ -12,7 +12,7 @@
     "autoload": {
         "psr-4": {
             "AskMe\\": "src/"
-        },
+        }
         
     },
      "minimum-stability": "dev"
