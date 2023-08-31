@@ -96,7 +96,7 @@ input[type='radio'] {
 
 /* Hide the default radio button */
  input[type='radio']::before {
-  content: "";
+  content: '';
   display: inline-block;
  
  
@@ -129,7 +129,7 @@ input[type='radio'] {
 
 /* Hide the default checkbox */
 input[type='checkbox']::before {
-  content: "";
+  content: '';
   display: inline-block;
 
   border-radius: 4px;
