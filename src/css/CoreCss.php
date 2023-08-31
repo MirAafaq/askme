@@ -78,7 +78,7 @@ select {
 }
 
 /* Styling for radio button */
-input[type="radio"] {
+input[type='radio'] {
   appearance: none;
   width:20px;
   padding:8px;
@@ -90,12 +90,12 @@ input[type="radio"] {
 }
 
 /* Styling for selected radio button */
- input[type="radio"]:checked {
+ input[type='radio']:checked {
   background-color: #e97688; /* Change to your desired color */
 }
 
 /* Hide the default radio button */
- input[type="radio"]::before {
+ input[type='radio']::before {
   content: "";
   display: inline-block;
  
@@ -109,7 +109,7 @@ input[type="radio"] {
 /* Styling for checkbox container */
 
 /* Styling for checkbox input */
- input[type="checkbox"] {
+ input[type='checkbox'] {
   appearance: none;
   width:20px;
   padding:8px;
@@ -123,12 +123,12 @@ input[type="radio"] {
 }
 
 /* Styling for selected checkbox */
- input[type="checkbox"]:checked {
+ input[type='checkbox']:checked {
  background:#459; /* Change to your desired color */
 }
 
 /* Hide the default checkbox */
-input[type="checkbox"]::before {
+input[type='checkbox']::before {
   content: "";
   display: inline-block;
 
