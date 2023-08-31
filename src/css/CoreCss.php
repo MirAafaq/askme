@@ -1,4 +1,11 @@
- form {
+ <?php 
+
+namespace AskMe\Css;
+class CoreCss {
+
+public function ApplyCss(){
+
+ $css = "<style>form {
     width: fit-content;
     text-align: start;
     margin: 20px;
@@ -136,4 +143,12 @@ input[type="checkbox"]::before {
 .mdbn {
     display: contents;
     white-space: pre-line;
+}
+</style>";
+ 
+ return $css;
+
+}
+
+
 }
