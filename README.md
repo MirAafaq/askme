@@ -2,6 +2,8 @@
 
 ### 
  simple Form Generator 
+ ![askme](https://codejourney.in/App/Uploads/External/Images/askme.png)
+
 # installation 
 - using composer
  ```bash
