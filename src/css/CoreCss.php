@@ -3,7 +3,7 @@
 namespace AskMe\Css;
 class CoreCss {
 
-public function ApplyCss(){
+public function applyCss(){
 
  $css = "<style>form {
     width: fit-content;
