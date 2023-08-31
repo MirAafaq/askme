@@ -23,7 +23,10 @@ use AskMe\Field\TextField;
 use AskMe\Field\EmailField;
 use AskMe\Field\TextAreaField;
 use AskMe\Field\PasswordField;
-
+use AskMe\css\CoreCss;
+$ob_css = new CoreCss();
+$form_css = $ob_css->ApplyCss();
+echo $form_css;
 $formBuilder = new AskForm('/submit.php');
 $formBuilder->addField(new TextField('name'));
 $formBuilder->addField(new EmailField('email'));
