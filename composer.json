@@ -1,7 +1,19 @@
 {
+    "name": "miraafaq/askme",
+    "type": "library",
+    "description": "Basic Form Generator",
+    "authors": [
+        {
+            "name": "Aafaq Ahmad Mir",
+            "email": "mira77065@gmail.com"
+        }
+    ],
+    
     "autoload": {
         "psr-4": {
             "AskMe\\": "src/"
-        }
-    }
+        },
+        
+    },
+     "minimum-stability": "dev"
 }
