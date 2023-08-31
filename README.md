@@ -23,7 +23,9 @@ use AskMe\Field\TextField;
 use AskMe\Field\EmailField;
 use AskMe\Field\TextAreaField;
 use AskMe\Field\PasswordField;
-use AskMe\css\CoreCss;
+use AskMe\Css\CoreCss;
+
+/* usage */
 $ob_css = new CoreCss();
 $form_css = $ob_css->ApplyCss();
 echo $form_css;
