@@ -1,6 +1,7 @@
  <?php 
-
 namespace AskMe\Css;
+
+
 class CoreCss {
 
 public function applyCss(){
