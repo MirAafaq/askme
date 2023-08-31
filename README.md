@@ -2,6 +2,16 @@
 
 ### 
  simple Form Generator 
+# installation 
+- using composer
+ ```bash
+composer require miraafaq/askme
+```
+- Git clone 
+```bash
+git clone https://github.com/miraafaq/askme.git
+```
+  
 
  # usage
  ```php
