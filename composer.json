@@ -2,6 +2,7 @@
     "name": "miraafaq/askme",
     "type": "library",
     "description": "Basic Form Generator",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Aafaq Ahmad Mir",
