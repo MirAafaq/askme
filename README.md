@@ -9,6 +9,11 @@
  ```bash
 composer require miraafaq/askme
 ```
+- using composer and specified Version
+ ```bash
+composer require miraafaq/askme "^1.0.3"
+```
+  
 - Git clone 
 ```bash
 git clone https://github.com/miraafaq/askme.git
