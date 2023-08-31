@@ -22,8 +22,8 @@ class AskForm
     }
     public function generateCss()
     {
-         $css_code = <<<EOF
-/* The .mdbn class is used to make text monospaced */
+         $css_code = "<style>
+
 .mdbn {
   display: contents;
   white-space: pre-line;
@@ -161,7 +161,7 @@ input[type='checkbox']::before {
 .checkbox-label {
   font-size: 14px;
 }
-EOF;
+</style>";
     return $css_code;
 
 
