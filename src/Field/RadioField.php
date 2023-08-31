@@ -14,7 +14,7 @@ class RadioField extends AbstractField
 
     public function render()
     {
-        $html = '<div><label>' . ucfirst($this->name) . ':</label><br>';
+        $html = '<div class="mdbn"><label>' . ucfirst($this->name) . ':</label><br>';
 
         foreach ($this->options as $value => $label) {
             $html .= '<label for="' . $this->name . '_' . $value . '">
