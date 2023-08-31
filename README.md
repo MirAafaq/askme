@@ -1,7 +1,7 @@
 # Askme
 
 ### 
- # Simple Dyanmic Form Builder
+ # Askme - Simple Dynamic Form Builder
  ![askme](https://codejourney.in/App/Uploads/External/Images/askme.png)
 
 # installation 
