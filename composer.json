@@ -2,7 +2,7 @@
     "name": "miraafaq/askme",
     "type": "library",
     "description": "Basic Form Generator",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "version": "1.0.3",
     "authors": [
         {
