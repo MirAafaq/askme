@@ -25,76 +25,51 @@ class AskForm
          $css_code = "<style>
 
 .mdbn {
-  display: contents;
-  white-space: pre-line;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 form {
   width: fit-content;
   text-align: start;
   margin: 20px;
-  font-family: calibri;
-  box-shadow: 1px 10px 40px lightcoral;
-  background: aliceblue;
+  font-family: 'calibri', sans-serif;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: #edf2f7;
   border-radius: 8px;
-  padding: 10px;
+  padding: 20px;
 }
 
-input {
+input, textarea, select {
   margin: 8px;
-  box-shadow: 1px 10px 40px lightcoral;
   border-radius: 8px;
-  width: -webkit-fill-available;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e0;
   transition: border-color 0.3s;
-  border: none;
-  padding: 10px;
+  background-color: #fff;
 }
 
-textarea {
-  border: none;
-  border-radius: 8px;
-  width: -webkit-fill-available;
-  margin: 4px;
-  padding: 4px;
-  box-shadow: 1px 10px 40px lightcoral;
-}
-
-textarea:focus {
-  outline: none;
-}
-
-/* Style for the input when focused */
-input:focus {
-  border-color: green;
+input:focus, textarea:focus, select:focus {
+  border-color: #4a90e2;
   outline: none;
 }
 
 button {
-  padding: 10px;
-  margin: 4px;
+  padding: 12px;
+  margin: 8px;
   font-weight: 800;
-  box-shadow: 1px 10px 40px lightcoral;
   border: none;
   border-radius: 6px;
+  background-color: #4a90e2;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background: #000;
-  box-shadow: 1px 10px 40px #fff;
-  color: #fff;
-}
-
-/* Styling for select field */
-select {
-  appearance: none;
-  outline: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 14px;
-  width: 100%;
-  max-width: 300px;
-  background-color: white;
+  background-color: #1c6bea;
 }
 
 /* Styling for radio button container */
@@ -105,62 +80,30 @@ select {
 }
 
 /* Styling for radio button */
-input[type='radio'] {
+input[type='radio'], input[type='checkbox'] {
   appearance: none;
   width: 20px;
+  height: 20px;
   padding: 8px;
-  border: 2px solid #007bff;
+  border: 2px solid #4a90e2;
+  border-radius: 4px;
   margin: 0;
   cursor: pointer;
   outline: none;
 }
 
-/* Styling for selected radio button */
-input[type='radio']:checked {
-  background-color: #e97688;
+/* Styling for selected radio button or checkbox */
+input[type='radio']:checked, input[type='checkbox']:checked {
+  background-color: #1c6bea;
+  border-color: #1c6bea;
 }
 
-/* Hide the default radio button */
-input[type='radio']::before {
-  content: '';
-  display: inline-block;
-}
-
-/* Optional: Adding a label for radio button */
-.radio-label {
+/* Optional: Adding a label for radio button or checkbox */
+.radio-label, .checkbox-label {
   font-size: 14px;
+  color: #2d3748;
 }
 
-/* Styling for checkbox container */
-
-/* Styling for checkbox input */
-input[type='checkbox'] {
-  appearance: none;
-  width: 20px;
-  padding: 8px;
-  border: none; /* Change to your desired color */
-  border-radius: 4px;
-  margin: 4px;
-  cursor: pointer;
-  outline: none;
-}
-
-/* Styling for selected checkbox */
-input[type='checkbox']:checked {
-  background: #459; /* Change to your desired color */
-}
-
-/* Hide the default checkbox */
-input[type='checkbox']::before {
-  content: '';
-  display: inline-block;
-  border-radius: 4px;
-}
-
-/* Optional: Adding a label for checkbox */
-.checkbox-label {
-  font-size: 14px;
-}
 </style>";
     return $css_code;
 
