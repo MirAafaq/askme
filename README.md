@@ -46,4 +46,4 @@ echo $formCssHTML;
 echo $formHTML;
 ```
 # Author 
-[Aafaq Ahmad Mir](https://instagram.com/mir.aafaq)
+[Aafaq Ahmad Mir](https://instagram.com/sylan.solis)
