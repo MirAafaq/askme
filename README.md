@@ -11,7 +11,7 @@ composer require miraafaq/askme
 ```
 - using composer and specified Version
  ```bash
-composer require miraafaq/askme "^1.0.5"
+composer require miraafaq/askme "^1.0.4"
 ```
   
 - Git clone 
