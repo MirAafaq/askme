@@ -3,12 +3,13 @@
 namespace AskMe;
 
 use AskMe\Field\AbstractField;
-
+use AskMe\Field\FileField;
 class AskForm
 {
     private $fields = [];
     private $action;
     private $method;
+    private $hasFileField = false;
 
     public function __construct($action, $method = 'POST')
     {
@@ -19,6 +20,10 @@ class AskForm
     public function addField(AbstractField $field)
     {
         $this->fields[] = $field;
+        // Check if the added field is a file field
+        if ($field instanceof FileField) {
+            $this->hasFileField = true;
+        }
     }
     public function generateCss()
     {
@@ -111,7 +116,17 @@ input[type='radio']:checked, input[type='checkbox']:checked {
     }
     public function generateForm()
     {
-        $form = '<form action="' . $this->action . '" method="' . $this->method . '">';
+        // Determine enctype based on whether a file field is added
+        $enctype = $this->hasFileField ? 'multipart/form-data' : '';
+
+        $form = '<form action="' . $this->action . '" method="' . $this->method . '"';
+
+        // Add enctype attribute if needed
+        if ($enctype !== '') {
+            $form .= ' enctype="' . $enctype . '"';
+        }
+
+        $form .= '>';
 
         foreach ($this->fields as $field) {
             $form .= $field->render();
