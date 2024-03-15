@@ -12,9 +12,7 @@ class CheckboxFieldTest extends TestCase
         $fieldName = 'test_field';
         $checkboxField = new CheckboxField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '">
-                    <input type="checkbox" name="' . $fieldName . '"> ' . ucfirst($fieldName) . '
-                </label><br>';
+        $expectedOutput = '<label for="' . $fieldName . '"><input type="checkbox" name="' . $fieldName . '"> ' . ucfirst($fieldName) . '</label><br>';
 
         $this->assertEquals($expectedOutput, $checkboxField->render());
     }
