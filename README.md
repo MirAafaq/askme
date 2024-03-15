@@ -67,6 +67,20 @@ echo $formHTML;
    ```bash
    php vendor/bin/phpunit
    ```
+ - if everything goes well you will see similar below results
+   ```bash
+   PS C:\Users\Azakios\Downloads\PHPTESTING\c> php vendor/bin/phpunit          
+PHPUnit 10.5.13 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.1.6
+Configuration: C:\Users\Azakios\Downloads\PHPTESTING\c\phpunit.xml
+
+.................                                                 17 / 17 (100%)
+
+Time: 00:00.060, Memory: 8.00 MB
+
+OK (17 tests, 22 assertions)
+```
    
    
 
