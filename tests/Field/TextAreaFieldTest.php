@@ -12,8 +12,7 @@ class TextAreaFieldTest extends TestCase
         $fieldName = 'message';
         $textAreaField = new TextAreaField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '">Message:</label>
-                <textarea name="' . $fieldName . '">Enter Your Text ....</textarea><br>';
+        $expectedOutput = '<label for="' . $fieldName . '">Message:</label><textarea name="' . $fieldName . '">Enter Your Text ....</textarea><br>';
 
         $this->assertEquals($expectedOutput, $textAreaField->render());
     }
