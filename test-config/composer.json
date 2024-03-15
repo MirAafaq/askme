@@ -1,0 +1,11 @@
+{
+    "require": {
+        "miraafaq/askme": "^1.0",
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AskMe\\": "src/"
+        }
+    }
+}
