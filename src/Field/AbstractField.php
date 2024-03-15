@@ -10,6 +10,10 @@ abstract class AbstractField
     {
         $this->name = $name;
     }
+    public function getName()
+    {
+        return $this->name;
+    }
 
     abstract public function render();
 }
