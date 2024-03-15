@@ -2,7 +2,7 @@
 
 ### 
  # Askme - Simple Dynamic Form Builder
- ![askme](https://i.ibb.co/60s0tzb/Capture.png)
+
 
 # installation 
 - using composer
