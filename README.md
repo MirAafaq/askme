@@ -45,5 +45,30 @@ $formHTML = $formBuilder->generateForm();
 echo $formCssHTML;
 echo $formHTML;
 ```
+# Testing 
+- After installing this library install phpunit for testing with below commmand in root directory
+  ```bash
+  composer require phpunit/phpunit
+  ```
+ - copy the file phpunit.xml available in test-config directory & paste it into root directory
+ - edit the composer.json in root directory and add the below code if not sure see composer.json in test-config directory
+   ```bash
+   "autoload": {
+        "psr-4": {
+            "AskMe\\": "src/"
+        }
+    }
+   ```
+ - run the below command
+    ```bash
+    composer dump-autoload
+    ```
+ - To Run tests enter below command
+   ```bash
+   php vendor/bin/phpunit
+   ```
+   
+   
+
 # Author 
 [Aafaq Ahmad Mir](https://miraafaq.in)
