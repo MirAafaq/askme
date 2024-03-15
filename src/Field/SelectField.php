@@ -14,8 +14,7 @@ class SelectField extends AbstractField
 
     public function render()
     {
-        $html = '<label for="' . $this->name . '">' . ucfirst($this->name) . ':</label>
-                <select name="' . $this->name . '">';
+        $html = '<label for="' . $this->name . '">' . ucfirst($this->name) . ':</label><select name="' . $this->name . '">';
 
         foreach ($this->options as $value => $label) {
             $html .= '<option value="' . $value . '">' . $label . '</option>';
