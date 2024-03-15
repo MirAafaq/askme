@@ -12,8 +12,7 @@ class TextFieldTest extends TestCase
         $fieldName = 'username';
         $textField = new TextField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '">Username:</label>
-                <input type="text" name="' . $fieldName . '" placeholder="' . $fieldName . '"><br>';
+        $expectedOutput = '<label for="' . $fieldName . '">Username:</label><input type="text" name="' . $fieldName . '" placeholder="' . $fieldName . '"><br>';
 
         $this->assertEquals($expectedOutput, $textField->render());
     }
