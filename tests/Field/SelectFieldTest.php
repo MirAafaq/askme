@@ -17,8 +17,7 @@ class SelectFieldTest extends TestCase
         ];
         $selectField = new SelectField($fieldName, $options);
 
-        $expectedOutput = '<label for="' . $fieldName . '">Country:</label>
-                <select name="' . $fieldName . '">'
+        $expectedOutput = '<label for="' . $fieldName . '">Country:</label><select name="' . $fieldName . '">'
             . '<option value="us">United States</option>'
             . '<option value="uk">United Kingdom</option>'
             . '<option value="ca">Canada</option>'
