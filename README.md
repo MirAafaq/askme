@@ -29,7 +29,7 @@ use AskMe\Field\TextField;
 use AskMe\Field\EmailField;
 use AskMe\Field\PasswordField;
 
-$formBuilder = new AskForm('/submit.php');
+$formBuilder = new AskForm('submit.php');
 $formBuilder->addField(new TextField('name'));
 $formBuilder->addField(new EmailField('email'));
 $formBuilder->addField(new PasswordField('password'));
