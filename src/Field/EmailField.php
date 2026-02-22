@@ -6,9 +6,20 @@ class EmailField extends AbstractField
 {
     public function render()
     {
-        $html = '<label for="' . $this->name . '" class="block font-medium mb-1">' . ucfirst($this->name) . ':</label>';
-        $html .= '<input type="email" name="' . $this->name . '" placeholder="' . $this->name . '"><br>';
+        $this->class('askme-input');
+        if (!isset($this->attributes['placeholder']) && $this->label) {
+            $this->placeholder((string)$this->label);
+        }
+        
+        $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
 
-        return $html;
+        return sprintf(
+            '<div class="%s">%s<input type="email"%s%s>%s</div>',
+            $this->wrapperClass,
+            $this->renderLabel(),
+            $this->buildAttributes(),
+            $valueAttr,
+            $this->renderHelper()
+        );
     }
 }

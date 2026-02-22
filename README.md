@@ -1,83 +1,91 @@
-### 
- # Askme - PowerFul Dynamic Form Builder
+# AskMe - Powerful Modern Dynamic Form Builder
 
+AskMe is a modern, lightweight, and incredibly flexible PHP form builder. Say goodbye to manual HTML markup and tedious attribute handling!
 
-# installation 
-- using composer
- ```bash
+## Installation
+
+Using composer:
+```bash
 composer require miraafaq/askme
 ```
-- using composer and specified Version
- ```bash
-composer require miraafaq/askme "^1.0.5"
-```
-  
-- Git clone 
-```bash
-git clone https://github.com/miraafaq/askme.git
-```
-  
 
- # usage
- ```php
- <?php
+## Features Overhauled
+- **Modern UI Styling**: Comes packed with a beautiful, professional, and responsive base CSS layout (rounded corners, shadow rings, smooth transitions).
+- **Grid Layout System**: Effortlessly organize your form elements into responsive multi-column rows.
+- **Fluent & Chainable Methods**: Easily customize fields directly upon instantiation using a chainable API (`->label()`, `->placeholder()`, `->required()`, etc.).
+- **Comprehensive Fields**: TextField, EmailField, PasswordField, CheckboxField, RadioField, SelectField, TextAreaField, FileField, and ButtonField.
+- **Easy Attributes Management**: Add any custom dataset (`data-*`), CSS class, or boolean attribute intuitively.
+
+## Usage Example
+
+```php
+<?php
 require_once __DIR__ . '/vendor/autoload.php';
-
 
 use AskMe\AskForm;
 use AskMe\Field\TextField;
 use AskMe\Field\EmailField;
 use AskMe\Field\PasswordField;
+use AskMe\Field\ButtonField;
 
-$formBuilder = new AskForm('submit.php');
-$formBuilder->addField(new TextField('name'));
-$formBuilder->addField(new EmailField('email'));
-$formBuilder->addField(new PasswordField('password'));
+// 1. Initialize the Form Builder
+$formBuilder = new AskForm('submit.php', 'POST');
+$formBuilder->setFormId('registration-form');
 
+// 2. Add Form Header
+$formBuilder->addHtml('<h2>Register Account</h2>');
+
+// 3. Create your fields using the intuitive Fluent API
+$firstName = (new TextField('first_name'))
+    ->label('First Name')
+    ->placeholder('John')
+    ->required(true)
+    ->class('custom-class')
+    ->helperText('Your given name');
+
+$lastName = (new TextField('last_name'))
+    ->label('Last Name')
+    ->placeholder('Doe')
+    ->required(true);
+
+$email = (new EmailField('email'))
+    ->label('Email Address')
+    ->required(true);
+
+$password = (new PasswordField('password'))
+    ->label('Secure Password')
+    ->required(true);
+
+$submitBtn = (new ButtonField('register_btn'))
+    ->type('submit')
+    ->value('Create Account')
+    ->class('askme-btn-primary');
+
+// 4. Arrange Layout (Grid Structure)
+$formBuilder->addRow([$firstName, $lastName]); // Places them side-by-side!
+$formBuilder->addField($email);
+$formBuilder->addField($password);
+$formBuilder->addField($submitBtn);
+
+// 5. Generate and Output
 $formCssHTML = $formBuilder->generateCss();
 $formHTML = $formBuilder->generateForm();
 
 echo $formCssHTML;
 echo $formHTML;
 ```
-# Testing 
-- After installing this library install phpunit for testing with below commmand in root directory
-  ```bash
-  composer require phpunit/phpunit
-  ```
- - copy the file phpunit.xml available in test-config directory & paste it into root directory
- - edit the composer.json in root directory and add the below code if not sure see composer.json in test-config directory
-   ```bash
-   "autoload": {
-        "psr-4": {
-            "AskMe\\": "src/"
-        }
-    }
-   ```
- - run the below command
-    ```bash
-    composer dump-autoload
-    ```
- - To Run tests enter below command
-   ```bash
-   php vendor/bin/phpunit
-   ```
- - if everything goes well you will see similar below results
-   ```bash
-   PS C:\Users\user\Downloads\PHPTESTING\c> php vendor/bin/phpunit          
-   PHPUnit 10.5.13 by Sebastian Bergmann and contributors.
 
-   Runtime:       PHP 8.1.6
-   Configuration: C:\Users\user\Downloads\PHPTESTING\c\phpunit.xml
+## Testing
 
-   .................                                                 17 / 17 (100%)
+Install PHPUnit dev dependency if not already present:
+```bash
+composer require phpunit/phpunit --dev
+```
 
-   Time: 00:00.060, Memory: 8.00 MB
+Run tests from the root directory:
+```bash
+vendor/bin/phpunit
+```
 
-   OK (17 tests, 22 assertions)
-   ```
-   
-   
-
-# Author 
+## Author 
 [Aafaq Ahmad Mir](https://miraafaq.in)

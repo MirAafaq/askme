@@ -10,21 +10,14 @@ class SelectFieldTest extends TestCase
     public function testRender()
     {
         $fieldName = 'country';
-        $options = [
-            'us' => 'United States',
-            'uk' => 'United Kingdom',
-            'ca' => 'Canada',
-        ];
+        $options = ['us' => 'United States', 'uk' => 'United Kingdom'];
         $selectField = new SelectField($fieldName, $options);
 
-        $expectedOutput = '<label for="' . $fieldName . '">Country:</label><select name="' . $fieldName . '">'
-            . '<option value="us">United States</option>'
-            . '<option value="uk">United Kingdom</option>'
-            . '<option value="ca">Canada</option>'
-            . '</select><br>';
+        $html = $selectField->render();
 
-        $this->assertEquals($expectedOutput, $selectField->render());
+        $this->assertStringContainsString('<select', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
+        $this->assertStringContainsString('value="us"', $html);
+        $this->assertStringContainsString('value="uk"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the SelectField class
 }

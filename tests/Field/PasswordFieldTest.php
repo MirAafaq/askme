@@ -12,11 +12,10 @@ class PasswordFieldTest extends TestCase
         $fieldName = 'password';
         $passwordField = new PasswordField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '">' . ucfirst($fieldName) . ':</label>'
-            . '<input type="password" name="' . $fieldName . '" placeholder="' . $fieldName . '"><br>';
+        $html = $passwordField->render();
 
-        $this->assertEquals($expectedOutput, $passwordField->render());
+        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('type="password"', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the PasswordField class
 }

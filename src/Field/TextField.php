@@ -6,6 +6,20 @@ class TextField extends AbstractField
 {
     public function render()
     {
-        return '<label for="' . $this->name . '">' . ucfirst($this->name) . ':</label><input type="text" name="' . $this->name . '" placeholder="' . $this->name . '"><br>';
+        $this->class('askme-input');
+        if (!isset($this->attributes['placeholder']) && $this->label) {
+            $this->placeholder((string)$this->label);
+        }
+        
+        $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
+
+        return sprintf(
+            '<div class="%s">%s<input type="text"%s%s>%s</div>',
+            $this->wrapperClass,
+            $this->renderLabel(),
+            $this->buildAttributes(),
+            $valueAttr,
+            $this->renderHelper()
+        );
     }
 }

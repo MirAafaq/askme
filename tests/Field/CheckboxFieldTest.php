@@ -9,13 +9,13 @@ class CheckboxFieldTest extends TestCase
 {
     public function testRender()
     {
-        $fieldName = 'test_field';
+        $fieldName = 'agree';
         $checkboxField = new CheckboxField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '"><input type="checkbox" name="' . $fieldName . '"> ' . ucfirst($fieldName) . '</label><br>';
+        $html = $checkboxField->render();
 
-        $this->assertEquals($expectedOutput, $checkboxField->render());
+        $this->assertStringContainsString('class="askme-checkbox-label"', $html);
+        $this->assertStringContainsString('type="checkbox"', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the CheckboxField class
 }

@@ -12,11 +12,10 @@ class EmailFieldTest extends TestCase
         $fieldName = 'email';
         $emailField = new EmailField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '" class="block font-medium mb-1">' . ucfirst($fieldName) . ':</label>'
-            . '<input type="email" name="' . $fieldName . '" placeholder="' . $fieldName . '"><br>';
+        $html = $emailField->render();
 
-        $this->assertEquals($expectedOutput, $emailField->render());
+        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('type="email"', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the EmailField class
 }

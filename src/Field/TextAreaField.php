@@ -1,10 +1,25 @@
 <?php
+
 namespace AskMe\Field;
 
 class TextAreaField extends AbstractField
 {
     public function render()
     {
-        return '<label for="' . $this->name . '">' . ucfirst($this->name) . ':</label><textarea name="' . $this->name . '">Enter Your Text ....</textarea><br>';
+        $this->class('askme-input askme-textarea');
+        if (!isset($this->attributes['placeholder']) && $this->label) {
+            $this->placeholder((string)$this->label);
+        }
+        
+        $content = $this->value !== null ? htmlspecialchars((string)$this->value) : '';
+
+        return sprintf(
+            '<div class="%s">%s<textarea%s>%s</textarea>%s</div>',
+            $this->wrapperClass,
+            $this->renderLabel(),
+            $this->buildAttributes(),
+            $content,
+            $this->renderHelper()
+        );
     }
 }

@@ -9,14 +9,12 @@ class FileFieldTest extends TestCase
 {
     public function testRender()
     {
-        $fieldName = 'file';
+        $fieldName = 'avatar';
         $fileField = new FileField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '" class="block font-medium mb-1">' . ucfirst($fieldName) . ':</label>'
-            . '<input type="file" name="' . $fieldName . '"><br>';
+        $html = $fileField->render();
 
-        $this->assertEquals($expectedOutput, $fileField->render());
+        $this->assertStringContainsString('type="file"', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the FileField class
 }

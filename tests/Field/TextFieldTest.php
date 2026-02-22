@@ -12,10 +12,10 @@ class TextFieldTest extends TestCase
         $fieldName = 'username';
         $textField = new TextField($fieldName);
 
-        $expectedOutput = '<label for="' . $fieldName . '">Username:</label><input type="text" name="' . $fieldName . '" placeholder="' . $fieldName . '"><br>';
+        $html = $textField->render();
 
-        $this->assertEquals($expectedOutput, $textField->render());
+        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('type="text"', $html);
+        $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }
-
-    // You can add more test methods to cover other functionalities of the TextField class
 }

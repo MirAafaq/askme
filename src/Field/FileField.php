@@ -6,9 +6,14 @@ class FileField extends AbstractField
 {
     public function render()
     {
-        $html = '<label for="' . $this->name . '" class="block font-medium mb-1">' . ucfirst($this->name) . ':</label>';
-        $html .= '<input type="file" name="' . $this->name . '"><br>';
-
-        return $html;
+        $this->class('askme-input askme-file');
+        
+        return sprintf(
+            '<div class="%s">%s<input type="file"%s>%s</div>',
+            $this->wrapperClass,
+            $this->renderLabel(),
+            $this->buildAttributes(),
+            $this->renderHelper()
+        );
     }
 }
