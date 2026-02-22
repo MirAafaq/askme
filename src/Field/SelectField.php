@@ -1,6 +1,6 @@
 <?php
 
-namespace AskMe\Field;
+namespace ArtifyForm\Field;
 
 class SelectField extends AbstractField
 {
@@ -18,9 +18,9 @@ class SelectField extends AbstractField
         return $this;
     }
 
-    public function render()
+    public function render(): string
     {
-        $this->class('askme-input askme-select');
+        $this->class('artifyform-input artifyform-select');
         
         $html = sprintf('<div class="%s">%s<select%s>', $this->wrapperClass, $this->renderLabel(), $this->buildAttributes());
 
@@ -36,7 +36,7 @@ class SelectField extends AbstractField
             $html .= sprintf('<option value="%s"%s>%s</option>', htmlspecialchars((string)$val), $selected, $label);
         }
 
-        $html .= '</select>' . $this->renderHelper() . '</div>';
+        $html .= '</select>' . $this->renderError() . $this->renderHelper() . '</div>';
 
         return $html;
     }

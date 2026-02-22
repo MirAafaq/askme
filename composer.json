@@ -1,5 +1,5 @@
 {
-    "name": "miraafaq/askme",
+    "name": "miraafaq/artifyform",
     "type": "library",
     "description": "Basic Form Generator",
     "license": "GPL-3.0-only",
@@ -13,12 +13,19 @@
     
     "autoload": {
         "psr-4": {
-            "AskMe\\": "src/"
+            "ArtifyForm\\": "src/"
         }
         
     },
      "minimum-stability": "stable",
     "require-dev": {
         "phpunit/phpunit": "^10.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ArtifyForm\\Integration\\Laravel\\ArtifyFormServiceProvider"
+            ]
+        }
     }
 }

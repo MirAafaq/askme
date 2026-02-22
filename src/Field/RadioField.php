@@ -1,6 +1,6 @@
 <?php
 
-namespace AskMe\Field;
+namespace ArtifyForm\Field;
 
 class RadioField extends AbstractField
 {
@@ -18,11 +18,11 @@ class RadioField extends AbstractField
         return $this;
     }
 
-    public function render()
+    public function render(): string
     {
-        $html = sprintf('<div class="%s askme-radio-group">%s<div class="askme-radio-options">', $this->wrapperClass, $this->renderLabel());
+        $html = sprintf('<div class="%s artifyform-radio-group">%s<div class="artifyform-radio-options">', $this->wrapperClass, $this->renderLabel());
         
-        $this->class('askme-radio');
+        $this->class('artifyform-radio');
 
         $isAssociative = array_keys($this->options) !== range(0, count($this->options) - 1);
 
@@ -43,7 +43,7 @@ class RadioField extends AbstractField
             }
 
             $html .= sprintf(
-                '<label class="askme-radio-label" for="%s"><input type="radio"%s%s> <span class="askme-radio-text">%s</span></label>',
+                '<label class="artifyform-radio-label" for="%s"><input type="radio"%s%s> <span class="artifyform-radio-text">%s</span></label>',
                 $id,
                 $attrStr,
                 $checked,
@@ -51,7 +51,7 @@ class RadioField extends AbstractField
             );
         }
 
-        $html .= '</div>' . $this->renderHelper() . '</div>';
+        $html .= '</div>' . $this->renderError() . $this->renderHelper() . '</div>';
 
         return $html;
     }

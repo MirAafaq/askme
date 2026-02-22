@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\SelectField;
+use ArtifyForm\Field\SelectField;
 
 class SelectFieldTest extends TestCase
 {

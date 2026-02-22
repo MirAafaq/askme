@@ -1,24 +1,25 @@
 <?php
 
-namespace AskMe\Field;
+namespace ArtifyForm\Field;
 
 class CheckboxField extends AbstractField
 {
-    public function render()
+    public function render(): string
     {
-        $this->class('askme-checkbox');
+        $this->class('artifyform-checkbox');
         
         $checkedAttr = $this->value ? ' checked' : '';
-        $req = isset($this->attributes['required']) ? ' <span class="askme-required">*</span>' : '';
+        $req = isset($this->attributes['required']) ? ' <span class="artifyform-required">*</span>' : '';
         $labelText = $this->label ?: ucfirst($this->name);
         
         return sprintf(
-            '<div class="%s askme-checkbox-group"><label class="askme-checkbox-label"><input type="checkbox"%s%s> <span class="askme-checkbox-text">%s</span>%s</label>%s</div>',
+            '<div class="%s artifyform-checkbox-group"><label class="artifyform-checkbox-label"><input type="checkbox"%s%s> <span class="artifyform-checkbox-text">%s</span>%s</label>%s%s</div>',
             $this->wrapperClass,
             $this->buildAttributes(),
             $checkedAttr,
             $labelText,
             $req,
+            $this->renderError(),
             $this->renderHelper()
         );
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\CheckboxField;
+use ArtifyForm\Field\CheckboxField;
 
 class CheckboxFieldTest extends TestCase
 {
@@ -14,7 +14,7 @@ class CheckboxFieldTest extends TestCase
 
         $html = $checkboxField->render();
 
-        $this->assertStringContainsString('class="askme-checkbox-label"', $html);
+        $this->assertStringContainsString('class="artifyform-checkbox-label"', $html);
         $this->assertStringContainsString('type="checkbox"', $html);
         $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }

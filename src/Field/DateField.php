@@ -2,17 +2,20 @@
 
 namespace ArtifyForm\Field;
 
-class FileField extends AbstractField
+class DateField extends AbstractField
 {
     public function render(): string
     {
-        $this->class('artifyform-input artifyform-file');
+        $this->class('artifyform-input artifyform-date');
         
+        $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
+
         return sprintf(
-            '<div class="%s">%s<input type="file"%s>%s%s</div>',
+            '<div class="%s">%s<input type="date"%s%s>%s%s</div>',
             $this->wrapperClass,
             $this->renderLabel(),
             $this->buildAttributes(),
+            $valueAttr,
             $this->renderError(),
             $this->renderHelper()
         );

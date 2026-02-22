@@ -1,89 +1,220 @@
-# AskMe - Powerful Modern Dynamic Form Builder
+# ArtifyForm - Powerful Dynamic Form Builder
 
-AskMe is a modern, lightweight, and incredibly flexible PHP form builder. Say goodbye to manual HTML markup and tedious attribute handling!
+ArtifyForm is a modern, lightweight, incredibly flexible PHP form builder designed to eliminate markup and tedious boilerplate attribute handling. Easily generate HTML forms, perform server-side validation, manage grid layouts, re-populate old inputs, and integrate natively into frameworks.
+
+## Table of Contents
+1. [Installation](#installation)
+2. [Quickstart Usage Example](#quickstart-usage-example)
+3. [Field Types & Methods](#field-types--methods)
+4. [Validation Engine](#validation-engine)
+5. [Layouts & Fieldsets](#layouts--fieldsets)
+6. [Framework Integrations](#framework-integrations)
+7. [Custom Extensions](#custom-extensions)
+
+---
 
 ## Installation
 
-Using composer:
+via composer:
 ```bash
-composer require miraafaq/askme
+composer require miraafaq/artifyform
 ```
 
-## Features Overhauled
-- **Modern UI Styling**: Comes packed with a beautiful, professional, and responsive base CSS layout (rounded corners, shadow rings, smooth transitions).
-- **Grid Layout System**: Effortlessly organize your form elements into responsive multi-column rows.
-- **Fluent & Chainable Methods**: Easily customize fields directly upon instantiation using a chainable API (`->label()`, `->placeholder()`, `->required()`, etc.).
-- **Comprehensive Fields**: TextField, EmailField, PasswordField, CheckboxField, RadioField, SelectField, TextAreaField, FileField, and ButtonField.
-- **Easy Attributes Management**: Add any custom dataset (`data-*`), CSS class, or boolean attribute intuitively.
+---
 
-## Usage Example
+## Quickstart Usage Example
+
+Build beautiful, self-validating forms in minutes using fluid APIs without ever touching `<form>` HTML manually!
 
 ```php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use AskMe\AskForm;
-use AskMe\Field\TextField;
-use AskMe\Field\EmailField;
-use AskMe\Field\PasswordField;
-use AskMe\Field\ButtonField;
+use ArtifyForm\ArtifyForm;
+use ArtifyForm\Fieldset;
+use ArtifyForm\Field\TextField;
+use ArtifyForm\Field\EmailField;
+use ArtifyForm\Field\ButtonField;
 
-// 1. Initialize the Form Builder
-$formBuilder = new AskForm('submit.php', 'POST');
+// 1. Initialize Builder
+$formBuilder = new ArtifyForm('submit.php', 'POST');
 $formBuilder->setFormId('registration-form');
 
-// 2. Add Form Header
+// 2. Add Native HTML (Headers)
 $formBuilder->addHtml('<h2>Register Account</h2>');
 
-// 3. Create your fields using the intuitive Fluent API
+// 3. Create Fluent Fields
 $firstName = (new TextField('first_name'))
     ->label('First Name')
-    ->placeholder('John')
-    ->required(true)
-    ->class('custom-class')
-    ->helperText('Your given name');
-
-$lastName = (new TextField('last_name'))
-    ->label('Last Name')
-    ->placeholder('Doe')
-    ->required(true);
+    ->placeholder('e.g. John')
+    ->rules(['required', 'min:3']);
 
 $email = (new EmailField('email'))
     ->label('Email Address')
-    ->required(true);
+    ->rules(['required', 'email']);
 
-$password = (new PasswordField('password'))
-    ->label('Secure Password')
-    ->required(true);
+$submitBtn = (new ButtonField('register_btn'))->type('submit')->value('Create Account')->class('artifyform-btn-primary');
 
-$submitBtn = (new ButtonField('register_btn'))
-    ->type('submit')
-    ->value('Create Account')
-    ->class('askme-btn-primary');
-
-// 4. Arrange Layout (Grid Structure)
-$formBuilder->addRow([$firstName, $lastName]); // Places them side-by-side!
-$formBuilder->addField($email);
-$formBuilder->addField($password);
+// 4. Arrange in layout grid
+$formBuilder->addRow([$firstName, $email]); 
 $formBuilder->addField($submitBtn);
 
-// 5. Generate and Output
-$formCssHTML = $formBuilder->generateCss();
-$formHTML = $formBuilder->generateForm();
+// 5. Automatic Validation
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($formBuilder->validate($_POST)) {
+        // Safe arrays!
+        $cleanData = $formBuilder->getValidatedData();
+    } else {
+        // Errors natively inject into their form fields 
+        $errors = $formBuilder->getErrors();
+    }
+}
 
-echo $formCssHTML;
-echo $formHTML;
+// 6. Generate (Outputs inline styled base CSS and completed HTML tags)
+echo $formBuilder->generateCss(); 
+echo $formBuilder->generateForm(); 
 ```
 
-## Testing
+---
 
-Install PHPUnit dev dependency if not already present:
+## Field Types & Methods
+
+All fields inherit from `AbstractField` allowing you to completely chain settings directly upon initialization.
+
+### Base Chainable Methods
+```php
+->label('My Field')        // Renders visual label
+->placeholder('Hint text') // Sets input placeholder
+->helperText('Extra desc') // Adds small instruction text under field
+->value('Default Value')   // Sets default input
+->class('custom-class')    // Appends an extra CSS class 
+->attr('data-id', 123)     // Pushes any custom attribute
+->required()               // Adds native HTML5 required="" parameter
+->rules(['required', '...']) // Initiates PHP Server-Side validation rules
+```
+
+### Available Field Types
+- `TextField`: Standard `<input type="text">`
+- `EmailField`: `<input type="email">`
+- `PasswordField`: `<input type="password">`
+- `HiddenField`: Invisible field for storing metadata or User IDs.
+- `NumberField`: Supports incrementing numbers (supports `->attr('min', 1)`)
+- `DateField`: Native HTML5 Calendar UI.
+- `ColorField`: Native Hex Color Picker UI.
+- `TextAreaField`: Long paragraph box.
+- `FileField`: Seamlessly converts `<form>` to `enctype="multipart/form-data"`!
+- `CheckboxField`: Supports a clean single toggle option.
+- `RadioField`: Define array options via `->options(['m'=>'Male', 'f'=>'Female'])`.
+- `SelectField`: Standard `<select>` dropdown (uses `->options([])`).
+- `MultiSelectField`: Multiple selection `<select multiple>`. Intelligently adds `[]` suffix to field name to auto-hydrate values as PHP Array!
+- `WysiwygField`: Standalone Rich-Text-Editor (Requires Zero Dependencies!). Contains localized Javascript for Bold, Italics, and Underlines piping to a hidden `<textarea>`.
+- `ButtonField`: Triggers submission `<button type="submit">`.
+
+---
+
+## Validation Engine 
+
+Add validation rule strings using `->rules(['rule:value'])` on any field.
+
+**Available Rules:**
+- `'required'`: Input must not be empty.
+- `'email'`: Standard PHP `FILTER_VALIDATE_EMAIL`.
+- `'numeric'`: Must be number format.
+- `'min:{x}'`: Minimum string length (e.g. `min:8` for passwords).
+- `'max:{x}'`: Maximum string length (e.g. `max:255`).
+
+If `$formBuilder->validate($_POST)` fails, **ArtifyForm remembers the user's previously typed inputs and automatically paints the error text in red beneath the targeted field dynamically.**
+
+---
+
+## Layouts & Fieldsets
+
+By default, inputs stack downwards. To implement styling you can use Grids or HTML Fieldset Groups.
+
+**Grids (Rows)**:
+Display elements side-by-side using `addRow()`.
+```php
+$formBuilder->addRow([
+    (new TextField('first_name'))->label('First Name'),
+    (new TextField('last_name'))->label('Last Name')
+]);
+```
+
+**Fieldset Containers**:
+Bundle related fields under a visually pleasing boundary.
+```php
+$billingFields = new \ArtifyForm\Fieldset('Billing Address');
+$billingFields->addRow([$country, $zipcode]);
+$formBuilder->addField($billingFields);
+```
+
+---
+
+## Framework Integrations
+
+ArtifyForm natively supports specific platform bindings!
+
+### 1. Laravel Native
+Because ArtifyForm ships via composer using `extra.laravel.providers`, its Core Service Provider is automatically discovered! Immediately use standard blade directives targeting an inherited `$formBuilder` variable passed through your Controller:
+```blade
+<!-- Places base CSS block in Head -->
+@artifyform_css($formBuilder)
+
+<!-- Outputs your configured form anywhere -->
+@artifyform_form($formBuilder)
+```
+
+### 2. WordPress Appending
+Register forms to shortcodes natively using ArtifyFormWP! Place this inside `functions.php`:
+```php
+use ArtifyForm\Integration\WordPress\ArtifyFormWP;
+
+ArtifyFormWP::registerShortcode('contact_us_form', function($atts) {
+    $form = new \ArtifyForm\ArtifyForm();
+    // Configure $form ...
+    return $form;
+});
+```
+Then output `[contact_us_form]` inside any Post layout!
+
+### 3. Razorpay Implementation
+Instantly mount a popup Razorpay Button simply by adding it exactly like an input field!
+```php
+use ArtifyForm\Integration\Razorpay\RazorpayButton;
+
+$payBtn = clone (new RazorpayButton('rzp_test_KEY123', 50000, 'My Company'))
+    ->theme('#ff5500')
+    ->prefill('John Doe', 'email@test.com', '9999999999');
+
+$formBuilder->addField($payBtn);
+```
+
+---
+
+## Custom Extensions
+
+ArtifyForm architecture rests strictly upon `SOLID` formatting. 
+You can override or invent new components infinitely without touching source code by simply implementing `RenderableInterface`.
+
+```php
+<?php
+class CustomInput implements \ArtifyForm\Contract\RenderableInterface {
+    public function render(): string {
+        return "<div class='mystyle'>My brand new HTML feature</div>";
+    }
+}
+
+// Inject directly!
+$formBuilder->addField(new CustomInput());
+```
+
+---
+
+## Testing Framework
+
+To run validations in dev structures use PHPUnit:
 ```bash
 composer require phpunit/phpunit --dev
-```
-
-Run tests from the root directory:
-```bash
 vendor/bin/phpunit
 ```
 

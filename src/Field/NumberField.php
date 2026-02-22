@@ -2,23 +2,23 @@
 
 namespace ArtifyForm\Field;
 
-class TextAreaField extends AbstractField
+class NumberField extends AbstractField
 {
     public function render(): string
     {
-        $this->class('artifyform-input artifyform-textarea');
+        $this->class('artifyform-input artifyform-number');
         if (!isset($this->attributes['placeholder']) && $this->label) {
             $this->placeholder((string)$this->label);
         }
         
-        $content = $this->value !== null ? htmlspecialchars((string)$this->value) : '';
+        $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
 
         return sprintf(
-            '<div class="%s">%s<textarea%s>%s</textarea>%s%s</div>',
+            '<div class="%s">%s<input type="number"%s%s>%s%s</div>',
             $this->wrapperClass,
             $this->renderLabel(),
             $this->buildAttributes(),
-            $content,
+            $valueAttr,
             $this->renderError(),
             $this->renderHelper()
         );
