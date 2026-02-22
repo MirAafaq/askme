@@ -1,0 +1,5 @@
+/vendor/
+/.phpunit.result.cache
+/error.log
+/rename_script.php
+/composer.lock
