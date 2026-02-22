@@ -1,30 +1,30 @@
 <?php
 
-namespace Tests\AskMe;
+namespace Tests\ArtifyForm;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\AskForm;
-use AskMe\Field\TextField;
-use AskMe\Field\EmailField;
-use AskMe\Field\FileField;
-use AskMe\Field\CheckboxField;
-use AskMe\Field\PasswordField;
-use AskMe\Field\RadioField;
-use AskMe\Field\SelectField;
-use AskMe\Field\TextAreaField;
+use ArtifyForm\ArtifyForm;
+use ArtifyForm\Field\TextField;
+use ArtifyForm\Field\EmailField;
+use ArtifyForm\Field\FileField;
+use ArtifyForm\Field\CheckboxField;
+use ArtifyForm\Field\PasswordField;
+use ArtifyForm\Field\RadioField;
+use ArtifyForm\Field\SelectField;
+use ArtifyForm\Field\TextAreaField;
 
-class AskFormTest extends TestCase
+class ArtifyFormTest extends TestCase
 {
     public function testGenerateCss()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $css = $askForm->generateCss();
         $this->assertNotEmpty($css);
     }
 
     public function testGenerateFormWithFileField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new TextField('username'));
         $askForm->addField(new EmailField('email'));
         $askForm->addField(new FileField('avatar'));
@@ -38,7 +38,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithoutFileField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new TextField('username'));
         $askForm->addField(new EmailField('email'));
 
@@ -48,7 +48,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithCheckboxField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new CheckboxField('agree'));
 
         $form = $askForm->generateForm();
@@ -58,7 +58,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithPasswordField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new PasswordField('password'));
 
         $form = $askForm->generateForm();
@@ -68,7 +68,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithRadioField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new RadioField('gender', ['male' => 'Male', 'female' => 'Female']));
 
         $form = $askForm->generateForm();
@@ -79,7 +79,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithSelectField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new SelectField('country', ['us' => 'United States', 'uk' => 'United Kingdom']));
 
         $form = $askForm->generateForm();
@@ -90,7 +90,7 @@ class AskFormTest extends TestCase
 
     public function testGenerateFormWithTextAreaField()
     {
-        $askForm = new AskForm('action.php');
+        $askForm = new ArtifyForm('action.php');
         $askForm->addField(new TextAreaField('message'));
 
         $form = $askForm->generateForm();

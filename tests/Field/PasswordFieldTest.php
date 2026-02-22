@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\PasswordField;
+use ArtifyForm\Field\PasswordField;
 
 class PasswordFieldTest extends TestCase
 {
@@ -14,7 +14,7 @@ class PasswordFieldTest extends TestCase
 
         $html = $passwordField->render();
 
-        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('class="artifyform-input"', $html);
         $this->assertStringContainsString('type="password"', $html);
         $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\TextField;
+use ArtifyForm\Field\TextField;
 
 class TextFieldTest extends TestCase
 {
@@ -14,7 +14,7 @@ class TextFieldTest extends TestCase
 
         $html = $textField->render();
 
-        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('class="artifyform-input"', $html);
         $this->assertStringContainsString('type="text"', $html);
         $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }

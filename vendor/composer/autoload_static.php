@@ -22,7 +22,7 @@ class ComposerStaticInit08f2c8399b559981d228228b5f0052cd
         ),
         'A' => 
         array (
-            'AskMe\\' => 6,
+            'ArtifyForm\\' => 11,
         ),
     );
 
@@ -35,7 +35,7 @@ class ComposerStaticInit08f2c8399b559981d228228b5f0052cd
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'AskMe\\' => 
+        'ArtifyForm\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

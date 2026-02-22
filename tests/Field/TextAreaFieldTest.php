@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\TextAreaField;
+use ArtifyForm\Field\TextAreaField;
 
 class TextAreaFieldTest extends TestCase
 {

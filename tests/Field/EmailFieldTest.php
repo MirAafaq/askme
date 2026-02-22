@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AskMe\Field;
+namespace Tests\ArtifyForm\Field;
 
 use PHPUnit\Framework\TestCase;
-use AskMe\Field\EmailField;
+use ArtifyForm\Field\EmailField;
 
 class EmailFieldTest extends TestCase
 {
@@ -14,7 +14,7 @@ class EmailFieldTest extends TestCase
 
         $html = $emailField->render();
 
-        $this->assertStringContainsString('class="askme-input"', $html);
+        $this->assertStringContainsString('class="artifyform-input"', $html);
         $this->assertStringContainsString('type="email"', $html);
         $this->assertStringContainsString('name="' . $fieldName . '"', $html);
     }

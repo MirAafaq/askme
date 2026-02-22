@@ -1,6 +1,6 @@
 <?php
 
-namespace AskMe\Field;
+namespace ArtifyForm\Field;
 
 class ButtonField extends AbstractField
 {
@@ -15,15 +15,15 @@ class ButtonField extends AbstractField
     public function type($type)
     {
         $this->type = $type;
-        $this->class('askme-btn askme-btn-' . $type);
+        $this->class('artifyform-btn artifyform-btn-' . $type);
         return $this;
     }
 
-    public function render()
+    public function render(): string
     {
-        $this->class('askme-btn');
-        if (!isset($this->attributes['class']) || strpos($this->attributes['class'], 'askme-btn-') === false) {
-             $this->class('askme-btn-primary');
+        $this->class('artifyform-btn');
+        if (!isset($this->attributes['class']) || strpos($this->attributes['class'], 'artifyform-btn-') === false) {
+             $this->class('artifyform-btn-primary');
         }
 
         $labelText = $this->value ?: $this->label;

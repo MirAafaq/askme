@@ -2,19 +2,16 @@
 
 namespace ArtifyForm\Field;
 
-class EmailField extends AbstractField
+class ColorField extends AbstractField
 {
     public function render(): string
     {
-        $this->class('artifyform-input');
-        if (!isset($this->attributes['placeholder']) && $this->label) {
-            $this->placeholder((string)$this->label);
-        }
+        $this->class('artifyform-input artifyform-color');
         
         $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
 
         return sprintf(
-            '<div class="%s">%s<input type="email"%s%s>%s%s</div>',
+            '<div class="%s">%s<input type="color"%s%s style="padding: 0; min-height: 40px; cursor: pointer;">%s%s</div>',
             $this->wrapperClass,
             $this->renderLabel(),
             $this->buildAttributes(),

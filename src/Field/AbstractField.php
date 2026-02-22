@@ -1,15 +1,24 @@
 <?php
 
-namespace AskMe\Field;
+namespace ArtifyForm\Field;
 
-abstract class AbstractField
+use ArtifyForm\Contract\RenderableInterface;
+
+abstract class AbstractField implements RenderableInterface
 {
     protected $name;
     protected $label;
     protected $value;
     protected $attributes = [];
-    protected $wrapperClass = 'askme-form-group';
+    protected $wrapperClass = 'artifyform-form-group';
     protected $helperText;
+    protected $error;
+    protected $rules = [];
+    
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
     
     public function __construct($name)
     {
@@ -80,6 +89,27 @@ abstract class AbstractField
         return $this;
     }
 
+    public function error($message)
+    {
+        $this->error = $message;
+        $this->class('artifyform-field-error');
+        return $this;
+    }
+
+    public function rules($rules)
+    {
+        if (is_string($rules)) {
+            $rules = explode('|', $rules);
+        }
+        $this->rules = $rules;
+        return $this;
+    }
+
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
+
     public function wrapperClass($class) {
         $this->wrapperClass = $class;
         return $this;
@@ -101,15 +131,21 @@ abstract class AbstractField
     protected function renderLabel()
     {
         if (!$this->label) return '';
-        $req = isset($this->attributes['required']) ? ' <span class="askme-required">*</span>' : '';
-        return '<label for="' . $this->attributes['id'] . '" class="askme-label">' . $this->label . $req . '</label>';
+        $req = isset($this->attributes['required']) ? ' <span class="artifyform-required">*</span>' : '';
+        return '<label for="' . $this->attributes['id'] . '" class="artifyform-label">' . $this->label . $req . '</label>';
     }
 
     protected function renderHelper()
     {
         if (!$this->helperText) return '';
-        return '<small class="askme-helper-text">' . $this->helperText . '</small>';
+        return '<small class="artifyform-helper-text">' . $this->helperText . '</small>';
     }
 
-    abstract public function render();
+    protected function renderError()
+    {
+        if (!$this->error) return '';
+        return '<div class="artifyform-error-text" style="color: var(--artifyform-error); font-size: 0.875rem; margin-top: 0.25rem;">' . htmlspecialchars($this->error) . '</div>';
+    }
+
+    abstract public function render(): string;
 }
