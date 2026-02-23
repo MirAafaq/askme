@@ -87,11 +87,34 @@ class Validator
             $max = (int) substr($rule, 4);
             if (strlen((string) $value) > $max) return "The {$label} field may not be greater than {$max} characters.";
         } elseif ($rule === 'required') {
-            if ($value === null || $value === '') return "The {$label} field is required.";
+            // For files, they come as array
+            if (is_array($value) && isset($value['error'])) {
+                if ($value['error'] !== UPLOAD_ERR_OK) return "The {$label} field is required.";
+            } else {
+                if ($value === null || $value === '') return "The {$label} field is required.";
+            }
         } elseif ($rule === 'email') {
             if ($value && !filter_var((string)$value, FILTER_VALIDATE_EMAIL)) return "The {$label} must be a valid email address.";
         } elseif ($rule === 'numeric') {
             if ($value && !is_numeric($value)) return "The {$label} must be a number.";
+        } elseif ($rule === 'honeypot') {
+            if (!empty($value)) return "Spam detected.";
+        } elseif (strpos($rule, 'mimes:') === 0) {
+            if (is_array($value) && $value['error'] === UPLOAD_ERR_OK) {
+                $allowed = explode(',', substr($rule, 6));
+                $ext = pathinfo($value['name'], PATHINFO_EXTENSION);
+                if (!in_array(strtolower($ext), $allowed)) {
+                    return "The {$label} must be a file of type: " . implode(', ', $allowed) . ".";
+                }
+            }
+        } elseif (strpos($rule, 'max_size:') === 0) {
+            if (is_array($value) && $value['error'] === UPLOAD_ERR_OK) {
+                $maxSizeKB = (int) substr($rule, 9);
+                $sizeKB = $value['size'] / 1024;
+                if ($sizeKB > $maxSizeKB) {
+                    return "The {$label} must not be greater than {$maxSizeKB} KB.";
+                }
+            }
         }
         
         return true;
@@ -111,7 +134,7 @@ class Validator
                         }
                     }
                 }
-            } elseif ($element instanceof \ArtifyForm\Fieldset) {
+            } elseif ($element instanceof \ArtifyForm\Fieldset || $element instanceof \ArtifyForm\Step) {
                 if (method_exists($element, 'getElements')) {
                     $fields = array_merge($fields, $this->extractFields($element->getElements()));
                 }

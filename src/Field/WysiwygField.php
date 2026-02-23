@@ -15,7 +15,7 @@ class WysiwygField extends AbstractField
 
         // Minimalist UI styling injected directly for the specific editor controls
         $editorHtml = sprintf('
-            <div class="%s" style="display: flex; flex-direction: column;">
+            <div class="%s"%s style="display: flex; flex-direction: column;">
                 %s
                 <div class="artifyform-wysiwyg-toolbar" style="display: flex; gap: 5px; padding: 8px; border: 1px solid var(--artifyform-border); border-bottom: none; border-radius: var(--artifyform-radius) var(--artifyform-radius) 0 0; background-color: #f3f4f6;">
                     <button type="button" onclick="document.execCommand(\'bold\',false,null);" style="cursor:pointer; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 4px; background: white;"><b>B</b></button>
@@ -43,7 +43,8 @@ class WysiwygField extends AbstractField
                 </script>
             </div>
         ', 
-            $this->wrapperClass, 
+            $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(), 
             $this->buildAttributes(), 
             $content, 

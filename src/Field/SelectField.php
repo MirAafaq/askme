@@ -22,7 +22,9 @@ class SelectField extends AbstractField
     {
         $this->class('artifyform-input artifyform-select');
         
-        $html = sprintf('<div class="%s">%s<select%s>', $this->wrapperClass, $this->renderLabel(), $this->buildAttributes());
+        $html = sprintf('<div class="%s"%s>%s<select%s>', $this->wrapperClass,
+            $this->buildWrapperAttributes(),
+            $this->renderLabel(), $this->buildAttributes());
 
         if (isset($this->attributes['placeholder'])) {
              $html .= '<option value="" disabled selected>' . htmlspecialchars($this->attributes['placeholder']) . '</option>';

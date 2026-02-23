@@ -11,8 +11,9 @@ class ColorField extends AbstractField
         $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
 
         return sprintf(
-            '<div class="%s">%s<input type="color"%s%s style="padding: 0; min-height: 40px; cursor: pointer;">%s%s</div>',
+            '<div class="%s"%s>%s<input type="color"%s%s style="padding: 0; min-height: 40px; cursor: pointer;">%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(),
             $this->buildAttributes(),
             $valueAttr,

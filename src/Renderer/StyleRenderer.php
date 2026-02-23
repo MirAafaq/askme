@@ -9,10 +9,54 @@ class StyleRenderer
      *
      * @return string
      */
-    public static function render(): string
+    public static function render(string $theme = 'default'): string
     {
-        return '<style>
-            :root {
+        $vars = '';
+        if ($theme === 'dark') {
+            $vars = '
+                --artifyform-primary: #3b82f6;
+                --artifyform-primary-hover: #2563eb;
+                --artifyform-bg: #1f2937;
+                --artifyform-text: #f9fafb;
+                --artifyform-border: #374151;
+                --artifyform-border-focus: #60a5fa;
+                --artifyform-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+                --artifyform-radius: 0.5rem;
+                --artifyform-error: #f87171;
+                --artifyform-label: #d1d5db;
+                --artifyform-input-bg: #374151;
+            ';
+        } elseif ($theme === 'glass') {
+            $vars = '
+                --artifyform-primary: #ec4899;
+                --artifyform-primary-hover: #db2777;
+                --artifyform-bg: rgba(255, 255, 255, 0.2);
+                --artifyform-text: #1e293b;
+                --artifyform-border: rgba(255, 255, 255, 0.3);
+                --artifyform-border-focus: #f472b6;
+                --artifyform-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                --artifyform-radius: 1rem;
+                --artifyform-error: #ef4444;
+                --artifyform-label: #334155;
+                --artifyform-input-bg: rgba(255, 255, 255, 0.5);
+            ';
+        } elseif ($theme === 'minimal') {
+            $vars = '
+                --artifyform-primary: #000000;
+                --artifyform-primary-hover: #333333;
+                --artifyform-bg: #ffffff;
+                --artifyform-text: #000000;
+                --artifyform-border: #e5e5e5;
+                --artifyform-border-focus: #000000;
+                --artifyform-shadow: none;
+                --artifyform-radius: 0px;
+                --artifyform-error: #dc2626;
+                --artifyform-label: #000000;
+                --artifyform-input-bg: #ffffff;
+            ';
+        } else {
+            // Default Tailwind-ish
+            $vars = '
                 --artifyform-primary: #4f46e5;
                 --artifyform-primary-hover: #4338ca;
                 --artifyform-bg: #ffffff;
@@ -23,6 +67,15 @@ class StyleRenderer
                 --artifyform-radius: 0.5rem;
                 --artifyform-error: #ef4444;
                 --artifyform-label: #374151;
+                --artifyform-input-bg: #f9fafb;
+            ';
+        }
+
+        $backdropFilter = $theme === 'glass' ? 'backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);' : '';
+
+        return '<style>
+            :root {
+                ' . $vars . '
             }
             .artifyform-container {
                 max-width: 800px;
@@ -33,7 +86,8 @@ class StyleRenderer
                 box-shadow: var(--artifyform-shadow);
                 font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 color: var(--artifyform-text);
-                border: 1px solid #e5e7eb;
+                border: 1px solid var(--artifyform-border);
+                ' . $backdropFilter . '
             }
             .artifyform-form-group {
                 margin-bottom: 1.5rem;
@@ -65,7 +119,8 @@ class StyleRenderer
                 padding: 0.75rem 1rem;
                 border: 1px solid var(--artifyform-border);
                 border-radius: var(--artifyform-radius);
-                background-color: #f9fafb;
+                background-color: var(--artifyform-input-bg);
+                color: var(--artifyform-text);
                 font-size: 1rem;
                 transition: all 0.2s ease-in-out;
                 box-sizing: border-box;
@@ -146,6 +201,27 @@ class StyleRenderer
             }
             .artifyform-btn-primary:hover {
                 background-color: var(--artifyform-primary-hover);
+            }
+            .razorpay-payment-button {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem 2.5rem;
+                font-size: 1.125rem;
+                font-weight: 600;
+                border: none;
+                border-radius: var(--artifyform-radius);
+                background-color: var(--artifyform-primary);
+                color: white;
+                cursor: pointer;
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+                margin-top: 1rem;
+            }
+            .razorpay-payment-button:hover {
+                background-color: var(--artifyform-primary-hover);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             }
             .artifyform-helper-text {
                 margin-top: 0.25rem;

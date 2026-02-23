@@ -11,6 +11,7 @@ abstract class AbstractField implements RenderableInterface
     protected $value;
     protected $attributes = [];
     protected $wrapperClass = 'artifyform-form-group';
+    protected $wrapperAttributes = [];
     protected $helperText;
     protected $error;
     protected $rules = [];
@@ -110,9 +111,27 @@ abstract class AbstractField implements RenderableInterface
         return $this->rules;
     }
 
+    public function dependsOn(string $fieldName, string $value)
+    {
+        $this->wrapperAttributes = [
+            'data-depends-on' => htmlspecialchars($fieldName),
+            'data-depends-value' => htmlspecialchars($value)
+        ];
+        return $this;
+    }
+
     public function wrapperClass($class) {
         $this->wrapperClass = $class;
         return $this;
+    }
+
+    protected function buildWrapperAttributes()
+    {
+        $html = '';
+        foreach ($this->wrapperAttributes as $key => $value) {
+            $html .= " {$key}=\"" . htmlspecialchars((string)$value) . "\"";
+        }
+        return $html;
     }
 
     protected function buildAttributes()

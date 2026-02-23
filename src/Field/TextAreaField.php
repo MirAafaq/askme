@@ -14,8 +14,9 @@ class TextAreaField extends AbstractField
         $content = $this->value !== null ? htmlspecialchars((string)$this->value) : '';
 
         return sprintf(
-            '<div class="%s">%s<textarea%s>%s</textarea>%s%s</div>',
+            '<div class="%s"%s>%s<textarea%s>%s</textarea>%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(),
             $this->buildAttributes(),
             $content,

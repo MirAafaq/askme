@@ -12,8 +12,9 @@ class PasswordField extends AbstractField
         }
 
         return sprintf(
-            '<div class="%s">%s<input type="password"%s>%s%s</div>',
+            '<div class="%s"%s>%s<input type="password"%s>%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(),
             $this->buildAttributes(),
             $this->renderError(),

@@ -189,6 +189,30 @@ $payBtn = clone (new RazorpayButton('rzp_test_KEY123', 50000, 'My Company'))
 $formBuilder->addField($payBtn);
 ```
 
+### 4. Real-Time Push Notifications (OneSignal API)
+Broadcast native push notifications to admin devices instantly upon form success.
+```php
+use ArtifyForm\Integration\OneSignal\OneSignalNotifier;
+
+if ($formBuilder->validate($_POST)) {
+    // Alert the admins via OneSignal app segment mapping!
+    $notifier = new OneSignalNotifier('your_app_id', 'your_rest_key');
+    $notifier->notifyAdmins("New form submission received from: " . $_POST['email']);
+}
+```
+
+### 5. WebSockets (Azure SignalR)
+Fire real-time HTTP broadcasts natively to all connected front-end WebSockets for live statistic updating across clients!
+```php
+use ArtifyForm\Integration\SignalR\SignalRNotifier;
+
+if ($formBuilder->validate($_POST)) {
+    // Broadast Event silently via Azure API!
+    $signalR = new SignalRNotifier('https://my-app.service.signalr.net', 'formHub', 'accessKey123');
+    $signalR->broadcast('ReceiveNewSubmission', [$_POST['email']]);
+}
+```
+
 ---
 
 ## Custom Extensions

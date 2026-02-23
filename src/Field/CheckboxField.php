@@ -13,8 +13,9 @@ class CheckboxField extends AbstractField
         $labelText = $this->label ?: ucfirst($this->name);
         
         return sprintf(
-            '<div class="%s artifyform-checkbox-group"><label class="artifyform-checkbox-label"><input type="checkbox"%s%s> <span class="artifyform-checkbox-text">%s</span>%s</label>%s%s</div>',
+            '<div class="%s artifyform-checkbox-group"%s><label class="artifyform-checkbox-label"><input type="checkbox"%s%s> <span class="artifyform-checkbox-text">%s</span>%s</label>%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->buildAttributes(),
             $checkedAttr,
             $labelText,

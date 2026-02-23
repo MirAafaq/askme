@@ -29,8 +29,9 @@ class ButtonField extends AbstractField
         $labelText = $this->value ?: $this->label;
 
         return sprintf(
-            '<div class="%s"><button type="%s"%s>%s</button></div>',
+            '<div class="%s"%s><button type="%s"%s>%s</button></div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->type,
             $this->buildAttributes(),
             htmlspecialchars($labelText)

@@ -20,7 +20,9 @@ class RadioField extends AbstractField
 
     public function render(): string
     {
-        $html = sprintf('<div class="%s artifyform-radio-group">%s<div class="artifyform-radio-options">', $this->wrapperClass, $this->renderLabel());
+        $html = sprintf('<div class="%s artifyform-radio-group"%s>%s<div class="artifyform-radio-options">', $this->wrapperClass,
+            $this->buildWrapperAttributes(),
+            $this->renderLabel());
         
         $this->class('artifyform-radio');
 

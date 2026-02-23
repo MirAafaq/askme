@@ -9,8 +9,9 @@ class FileField extends AbstractField
         $this->class('artifyform-input artifyform-file');
         
         return sprintf(
-            '<div class="%s">%s<input type="file"%s>%s%s</div>',
+            '<div class="%s"%s>%s<input type="file"%s>%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(),
             $this->buildAttributes(),
             $this->renderError(),

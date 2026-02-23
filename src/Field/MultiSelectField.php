@@ -35,7 +35,9 @@ class MultiSelectField extends AbstractField
         $currentStyle = $this->attributes['style'] ?? '';
         $this->attributes['style'] = $currentStyle . ' height: auto; padding: 0.5rem;';
 
-        $html = sprintf('<div class="%s">%s<select%s>', $this->wrapperClass, $this->renderLabel(), $this->buildAttributes());
+        $html = sprintf('<div class="%s"%s>%s<select%s>', $this->wrapperClass,
+            $this->buildWrapperAttributes(),
+            $this->renderLabel(), $this->buildAttributes());
 
         $isAssociative = array_keys($this->options) !== range(0, count($this->options) - 1);
         

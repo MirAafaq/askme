@@ -14,8 +14,9 @@ class TextField extends AbstractField
         $valueAttr = $this->value !== null ? ' value="' . htmlspecialchars((string)$this->value) . '"' : '';
 
         return sprintf(
-            '<div class="%s">%s<input type="text"%s%s>%s%s</div>',
+            '<div class="%s"%s>%s<input type="text"%s%s>%s%s</div>',
             $this->wrapperClass,
+            $this->buildWrapperAttributes(),
             $this->renderLabel(),
             $this->buildAttributes(),
             $valueAttr,
